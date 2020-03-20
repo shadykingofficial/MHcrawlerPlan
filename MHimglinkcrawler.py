@@ -22,9 +22,17 @@ linkfile=open(mhdocument+"/"+mhbook,"r")
 mh_urls = linkfile.readline()
 total_url=len(mh_urls)
 print("漫画链接："+str(total_url))
-#for mh_solo_url in mh_urls:
- ##   mh_url_src=requests.get(mh_solo_url_str).content
-   # print(mh_url_src)
+for mh_solo_url in linkfile:
+    #print(mh_solo_url)
+    solo_chapter_src=requests.get(mh_solo_url)
+    solo_chapter_html=solo_chapter_src.content.decode("UTF-8")
+    #print(solo_chapter_html)
+    solo_img_link = re.findall(r"data-original=(.*).jpg$",solo_chapter_html)
+    for solo_img_url in solo_img_link:
+        mh_img_url=solo_img_url+".jpg"
+        print(mh_img_url)
+
+
 
 
 
