@@ -16,23 +16,31 @@ headers={
 }
 whichbook=input("输入爬取漫画号：")
 mhdocument="mhfile"
+mh_imgurldoc="MH-imgurl"
+if not os.path.exists(mh_imgurldoc):
+    os.mkdir(mh_imgurldoc)
 mhbook="book"+whichbook+".txt"
-
 linkfile=open(mhdocument+"/"+mhbook,"r")
 mh_urls = linkfile.readline()
 total_url=len(mh_urls)
 print("漫画链接："+str(total_url))
+
 for mh_solo_url in linkfile:
     #print(mh_solo_url)
-    solo_chapter_src=requests.get(mh_solo_url)
-    solo_chapter_html=solo_chapter_src.content.decode("UTF-8")
+    solo_chapter_src = requests.get(mh_solo_url)
+    solo_chapter_html = solo_chapter_src.content.decode("UTF-8")
     #print(solo_chapter_html)
-    solo_img_link = re.findall(r"data-original=(.*).jpg$",solo_chapter_html)
-    for solo_img_url in solo_img_link:
-        mh_img_url=solo_img_url+".jpg"
-        print(mh_img_url)
-
-
+    all_chapter_imgname = re.findall(r"<h1 class=\"title\">(.*?)</h1>", solo_chapter_html)
+    mh_bookname= BeautifulSoup.find(r"<a class=.*?>(.*?)</a>", solo_chapter_html)
+    all_img_url = re.findall(r"http.*?\d+.jpg", solo_chapter_html)
+    print(mh_bookname)
+    for solo_chapter_imgname in all_chapter_imgname:
+        print(all_chapter_imgname)
+    for solo_img_url in all_img_url:
+        print(solo_img_url)
+    with open(mh_imgurldoc+"/"+mh_bookname+".txt") as mhbook:
+        mhbook.write()
+        mhbook.close()
 
 
 

@@ -25,12 +25,11 @@ mhpath=mhdocument+"/"+mhbook
 mhhtml=requests.get(url+whichbook).text
 mhhtml.encode("utf-8")
 mhlink=re.findall(r"\/chapter\/\d+",mhhtml)
-mhname=re.findall(r"(?<=<h1>).+?(?=<h1>)",mhhtml)
+mhname=re.findall(r"<h1>(.*?)</h1>",mhhtml)
 print(mhname)
 for info in mhlink:
     realmhlink=baseurl+info
     print(realmhlink)
-
     with open(mhpath,"a")as mh:
         mh.write(realmhlink+"\n")
         mh.close()
