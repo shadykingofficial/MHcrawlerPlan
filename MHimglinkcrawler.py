@@ -12,13 +12,13 @@ headers={
     'Host':'https://www.hanmanwo.net',
     'Referer':'https://www.hanmanwo.net',
     'User-Agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-    'Cookie':'PHPSESSID=0uqatsfag6ssbng5rul475v0hn; Hm_lvt_3cf6b4fe1ac99e4aae35204f8990d09b=1583404364,1584515641; nav_switch=booklist; Hm_lpvt_3cf6b4fe1ac99e4aae35204f8990d09b=1584515704',
+    'Cookie':'PHPSESSID=008k6em59jpjtdvptfssraimdm; Hm_lvt_3cf6b4fe1ac99e4aae35204f8990d09b=1584631486; nav_switch=booklist; Hm_lpvt_3cf6b4fe1ac99e4aae35204f8990d09b=1584632201',
 }
 whichbook=input("输入爬取漫画号：")
-osdir="C:/Users/Administrator/PycharmProjects/untitled/"
 mhdocument="mhfile"
 mhbook="book"+whichbook+".txt"
-linkfile=open(osdir+mhdocument+"/"+mhbook,"r")
+
+linkfile=open(mhdocument+"/"+mhbook,"r")
 mh_urls = linkfile.readline()
 total_url=len(mh_urls)
 print("漫画链接："+str(total_url))

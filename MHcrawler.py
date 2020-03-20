@@ -14,8 +14,9 @@ headers={
     'Cookie':'PHPSESSID=0uqatsfag6ssbng5rul475v0hn; Hm_lvt_3cf6b4fe1ac99e4aae35204f8990d09b=1583404364,1584515641; nav_switch=booklist; Hm_lpvt_3cf6b4fe1ac99e4aae35204f8990d09b=1584515704',
 }
 whichbook=input("请输入漫画号：")
-mainurl="https://www.hanmanwo.net"
-url=mainurl+"/book/"
+
+baseurl="https://www.hanmanwo.net"
+url=baseurl+"/book/"
 mhdocument="mhfile"
 if not os.path.exists(mhdocument):
     os.mkdir(mhdocument)
@@ -24,10 +25,12 @@ mhpath=mhdocument+"/"+mhbook
 mhhtml=requests.get(url+whichbook).text
 mhhtml.encode("utf-8")
 mhlink=re.findall(r"\/chapter\/\d+",mhhtml)
-mhname="测试"
+mhname=re.findall(r"(?<=<h1>).+?(?=<h1>)",mhhtml)
+print(mhname)
 for info in mhlink:
-    realmhlink=mainurl+info
+    realmhlink=baseurl+info
     print(realmhlink)
+
     with open(mhpath,"a")as mh:
         mh.write(realmhlink+"\n")
         mh.close()
